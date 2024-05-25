@@ -10,8 +10,6 @@
   <a href="https://app.circleci.com/pipelines/github/facebookresearch/fairseq/"><img alt="CicleCI Status" src="https://circleci.com/gh/facebookresearch/fairseq.svg?style=shield" /></a>
 </p>
 
---------------------------------------------------------------------------------
-Edited by Arvind Roshaan
 
 Fairseq(-py) is a sequence modeling toolkit that allows researchers and
 developers to train custom models for translation, summarization, language
@@ -21,17 +19,17 @@ We provide reference implementations of various sequence modeling papers:
 
 <details><summary>List of implemented papers</summary><p>
 
-* **Convolutional Neural Networks (CNN)**
+ **Convolutional Neural Networks (CNN)**
   + [Language Modeling with Gated Convolutional Networks (Dauphin et al., 2017)](examples/language_model/conv_lm/README.md)
   + [Convolutional Sequence to Sequence Learning (Gehring et al., 2017)](examples/conv_seq2seq/README.md)
   + [Classical Structured Prediction Losses for Sequence to Sequence Learning (Edunov et al., 2018)](https://github.com/pytorch/fairseq/tree/classic_seqlevel)
   + [Hierarchical Neural Story Generation (Fan et al., 2018)](examples/stories/README.md)
   + [wav2vec: Unsupervised Pre-training for Speech Recognition (Schneider et al., 2019)](examples/wav2vec/README.md)
-* **LightConv and DynamicConv models**
+ **LightConv and DynamicConv models**
   + [Pay Less Attention with Lightweight and Dynamic Convolutions (Wu et al., 2019)](examples/pay_less_attention_paper/README.md)
-* **Long Short-Term Memory (LSTM) networks**
+ **Long Short-Term Memory (LSTM) networks**
   + Effective Approaches to Attention-based Neural Machine Translation (Luong et al., 2015)
-* **Transformer (self-attention) networks**
+ **Transformer (self-attention) networks**
   + Attention Is All You Need (Vaswani et al., 2017)
   + [Scaling Neural Machine Translation (Ott et al., 2018)](examples/scaling_nmt/README.md)
   + [Understanding Back-Translation at Scale (Edunov et al., 2018)](examples/backtranslation/README.md)
@@ -59,13 +57,13 @@ We provide reference implementations of various sequence modeling papers:
   + [VideoCLIP: Contrastive Pre-training for Zero-shot Video-Text Understanding (Xu et. al., 2021)](https://arxiv.org/pdf/2109.14084.pdf)
   + [VLM: Task-agnostic Video-Language Model Pre-training for Video Understanding (Xu et. al., 2021)](https://aclanthology.org/2021.findings-acl.370.pdf)
   + [NormFormer: Improved Transformer Pretraining with Extra Normalization (Shleifer et. al, 2021)](examples/normformer/README.md)
-* **Non-autoregressive Transformers**
+ **Non-autoregressive Transformers**
   + Non-Autoregressive Neural Machine Translation (Gu et al., 2017)
   + Deterministic Non-Autoregressive Neural Sequence Modeling by Iterative Refinement (Lee et al. 2018)
   + Insertion Transformer: Flexible Sequence Generation via Insertion Operations (Stern et al. 2019)
   + Mask-Predict: Parallel Decoding of Conditional Masked Language Models (Ghazvininejad et al., 2019)
   + [Levenshtein Transformer (Gu et al., 2019)](examples/nonautoregressive_translation/README.md)
-* **Finetuning**
+ **Finetuning**
   + [Better Fine-Tuning by Reducing Representational Collapse (Aghajanyan et al. 2020)](examples/rxf/README.md)
 
 </p></details>
@@ -241,5 +239,6 @@ Please cite as:
   year = {2019},
 }
 ```
-#   f a i r s e q - n m t  
+#   f a i r s e q - n m t 
+ 
  
