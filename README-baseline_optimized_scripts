@@ -1,0 +1,32 @@
+#Scripts to train an optimized baseline model
+
+#declare the following variables in the terminal
+model_folder_name=procv6_5e_5d.eng-lmn
+model_desc=adam_weight_deacy_1e-3
+source_lang=eng
+target_lang=lmn
+num_bpe_merges=2500
+cuda_device=0
+is_train=1
+is_valid=1
+is_test=1
+
+bash create_folders_for_training.sh -n $model_folder_name -d $model_desc
+cd examples/translation/
+#Keep data files [train/valid/test].[language_code] in fairseq/examples/translation/$model_folder_name/tmp/bkp_custom manually
+#Keep data files [train/valid/test].[language_code] in fairseq/examples/translation/$model_folder_name/tmp manually
+bash learn_bpe.sh -n $model_folder_name -l $source_lang -b $num_bpe_merges
+bash learn_bpe.sh -n $model_folder_name -l $target_lang -b $num_bpe_merges
+bash apply_bpe.sh -n $model_folder_name -l $source_lang
+bash apply_bpe.sh -n $model_folder_name -l $target_lang
+cd ../..
+bash binarize_data.sh -n $model_folder_name -s $source_lang -t $target_lang
+
+CUDA_VISIBLE_DEVICES=$cuda_device python fairseq_cli/train_baseline.py data-bin/$model_folder_name --max-source-positions=210 --max-target-positions=210 --max-update=1000000 --save-interval=1 --arch transformer_baseline_optimized --share-decoder-input-output-embed  --source-lang=$source_lang --target-lang=$target_lang --optimizer adam --adam-betas '(0.9, 0.98)' --warmup-init-lr 1e-07 --lr 5e-4 --lr-scheduler inverse_sqrt --warmup-updates 4000 --weight-decay 0.001 --criterion label_smoothed_cross_entropy --label-smoothing 0.5 --save-dir "checkpoints/${model_folder_name}/${model_desc}" --tensorboard-logdir log_custom_fldr/$model_folder_name/$model_desc/tensorboard-wandb --patience 500 --batch-size 4096 --max-tokens 4096 --keep-last-epochs 1 --skip-invalid-size-inputs-valid-test --wandb-project $model_folder_name-$model_desc --fp16 --log-file log_custom_fldr/$model_folder_name/$model_desc/train_log.txt
+
+CUDA_VISIBLE_DEVICES=$cuda_device bash generate_predictions_from_best_checkpoint.sh -n $model_folder_name -d $model_desc -s $source_lang -t $target_lang -a $is_train -b $is_valid -c $is_test
+CUDA_VISIBLE_DEVICES=$cuda_device bash generate_predictions_from_last_checkpoint.sh -n $model_folder_name -d $model_desc -s $source_lang -t $target_lang -a $is_train -b $is_valid -c $is_test
+bash extract_best_checkpoint_predictions.sh -n $model_folder_name -d $model_desc -s $source_lang -t $target_lang -a $is_train -b $is_valid -c $is_test
+bash extract_last_checkpoint_predictions.sh -n $model_folder_name -d $model_desc -s $source_lang -t $target_lang -a $is_train -b $is_valid -c $is_test
+bash get_best_checkpoint_sacrebleu.sh -n $model_folder_name -d $model_desc -a $is_train -b $is_valid -c $is_test
+bash get_last_checkpoint_sacrebleu.sh -n $model_folder_name -d $model_desc -a $is_train -b $is_valid -c $is_test

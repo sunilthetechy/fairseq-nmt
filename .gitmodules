@@ -1,0 +1,10 @@
+[submodule "fairseq/model_parallel/megatron"]
+    path = fairseq/model_parallel/megatron
+    url = https://github.com/ngoyal2707/Megatron-LM
+    branch = fairseq
+[submodule "examples/translation/mosesdecoder"]
+	path = examples/translation/mosesdecoder
+	url = https://github.com/moses-smt/mosesdecoder.git
+[submodule "examples/translation/subword-nmt"]
+	path = examples/translation/subword-nmt
+	url = https://github.com/rsennrich/subword-nmt.git
